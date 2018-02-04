@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import Board from './Board';
 
 // Component is now a "stateful" one
 class App extends React.Component {
@@ -11,17 +11,18 @@ class App extends React.Component {
     };
   }
 
-  addOne = () => {
-    this.setState({
-      count: this.state.count + 1,
-    });
-  }
-
   render() {
     return (
-      <div className="container">
-        <h1>Count: {this.state.count}</h1>
-        <Button color="primary" onClick={this.addOne}>Add One</Button>
+      <div className="container game">
+        <div className="game">
+          <div className="game-board">
+            <Board />
+          </div>
+          <div className="game-info">
+            <div>{ /* status */ }</div>
+            <ol>{ /* TODO */ }</ol>
+          </div>
+        </div>
       </div>
     );
   }
