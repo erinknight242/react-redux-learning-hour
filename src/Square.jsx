@@ -1,14 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Square = ({ value }) => (
-  <div className="square">
-    {value}
-  </div>
-);
+class Square extends React.Component {
+  constructor() {
+    super();
 
-Square.propTypes = {
-  value: PropTypes.number.isRequired,
-};
+    this.state = {
+      value: null,
+    };
+  }
+
+  setSquare = () => {
+    this.setState({
+      value: 'X',
+    });
+  }
+
+  render() {
+    return (
+      <div className="square" onClick={this.setSquare}>
+        {this.state.value}
+      </div>
+    );
+  }
+}
 
 export default Square;
