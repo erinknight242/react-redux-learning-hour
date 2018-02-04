@@ -1,25 +1,59 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 import Square from './Square';
+
+const calculateWinner = (squares) => {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+};
+
+const initialState = {
+  squares: Array(9).fill(null),
+  nextPlayer: 'X',
+  turnsPlayed: 0,
+};
 
 class Board extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      squares: Array(9).fill(null),
-      nextPlayer: 'X',
+      ...initialState,
     };
   }
 
   handleClick = (i) => {
     const squares = [...this.state.squares];
-    if (squares[i] === null) {
-      squares[i] = this.state.nextPlayer;
-      this.setState({
-        squares,
-        nextPlayer: this.state.nextPlayer === 'X' ? 'O' : 'X',
-      });
+    if (calculateWinner(squares) || squares[i]) {
+      return;
     }
+    squares[i] = this.state.nextPlayer;
+    this.setState({
+      squares,
+      turnsPlayed: this.state.turnsPlayed + 1,
+      nextPlayer: this.state.nextPlayer === 'X' ? 'O' : 'X',
+    });
+  }
+
+  handleNewGame = () => {
+    this.setState({
+      ...initialState,
+    });
   }
 
   renderSquare = i => (
@@ -30,7 +64,15 @@ class Board extends React.Component {
   )
 
   render() {
-    const status = `Next player: ${this.state.nextPlayer}`;
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = `Winner: ${winner}`;
+    } else if (this.state.turnsPlayed === 9) {
+      status = 'Cats game!';
+    } else {
+      status = `Next player: ${this.state.nextPlayer}`;
+    }
 
     return (
       <div>
@@ -50,6 +92,7 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        {(winner || this.state.turnsPlayed === 9) && <Button color="primary" onClick={this.handleNewGame}>New Game</Button>}
       </div>
     );
   }

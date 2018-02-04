@@ -37,6 +37,10 @@ ol, ul {
   margin-bottom: 10px;
 }
 
+button {
+  margin-top: 10px;
+}
+
 .square:focus {
   outline: none;
 }
