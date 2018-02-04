@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import Square from './Square';
 
-const calculateWinner = (squares) => {
+export const calculateWinner = (squares) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
