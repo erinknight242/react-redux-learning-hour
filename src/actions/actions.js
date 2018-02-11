@@ -3,9 +3,9 @@ import { displayWelcomeCard, displayCardList } from './actionTypes';
 export const getWelcomeCardData = () => dispatch =>
   dispatch(
     displayWelcomeCard({
-      title: 'redux',
-      msg: 'redux',
-      imgUrl: 'redux',
+      title: 'Welcome to the Sample Dashboard',
+      msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cursus vitae velit a congue.',
+      imgUrl: 'http://icdn8.digitaltrends.com/image/funny-grumpy-cat-images-hd-wallpaper-1080x611-640x0.jpg',
     }),
   );
 
