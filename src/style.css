@@ -1,46 +1,56 @@
+
 body {
-  font: 14px 'Century Gothic', 'Futura', sans-serif;
-  margin: 20px;
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
-.square {
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
-  cursor: pointer;
+.dashboard-wrapper {
+	align-self: center;
+	min-width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
-ol, ul {
-  padding-left: 30px;
+.cards-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
-.game {
-  display: flex;
-  flex-direction: row;
+.cards-wrapper .card-item {
+  margin-top: 40px;
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+.simple-card-wide.mdl-card.mdl-shadow--2dp {
+  min-width: 100%;
+  min-height: 300px;
 }
 
-.status {
-  margin-bottom: 10px;
+.simple-card-wide.mdl-card.mdl-shadow--2dp > .mdl-card__title {
+  color: #fff;
+  height: 250px;
 }
 
-button {
-  margin-top: 10px;
+.simple-card-wide.mdl-card.mdl-shadow--2dp > .mdl-card__title h2.mdl-card__title-text {
+  width: 100%;
+  margin: -16px;
+  padding: 10px 16px;
+  background: rgba(0,0,0,0.5);
 }
 
-.square:focus {
-  outline: none;
+.simple-card-wide.mdl-card.mdl-shadow--2dp > .mdl-card__menu {
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .cards-wrapper .card-item.simple-card-wide.mdl-card.mdl-shadow--2dp {
+    min-width: 48%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-wrapper {
+    min-width: 1200px;
+  }
 }
