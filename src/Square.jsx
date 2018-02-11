@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Square = ({ onClick, value }) => (
-  <div className="square" onClick={onClick}>
+const Square = ({ value, onClick }) => (
+  <div
+    className="square"
+    onClick={onClick}
+  >
     {value}
   </div>
 );

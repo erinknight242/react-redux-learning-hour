@@ -13,6 +13,7 @@ export const calculateWinner = (squares) => {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
@@ -38,15 +39,18 @@ class Board extends React.Component {
   }
 
   handleClick = (i) => {
-    const squares = [...this.state.squares];
+    const { squares, nextPlayer, turnsPlayed } = this.state;
+
+    const updatedSquares = [...squares];
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.nextPlayer;
+
+    updatedSquares[i] = nextPlayer;
     this.setState({
-      squares,
-      turnsPlayed: this.state.turnsPlayed + 1,
-      nextPlayer: this.state.nextPlayer === 'X' ? 'O' : 'X',
+      squares: updatedSquares,
+      nextPlayer: nextPlayer === 'X' ? 'O' : 'X',
+      turnsPlayed: turnsPlayed + 1,
     });
   }
 
@@ -64,14 +68,18 @@ class Board extends React.Component {
   )
 
   render() {
-    const winner = calculateWinner(this.state.squares);
+    const { squares, turnsPlayed, nextPlayer } = this.state;
+
+    const winner = calculateWinner(squares);
+    const gameIsOver = winner || turnsPlayed === 9;
+
     let status;
     if (winner) {
       status = `Winner: ${winner}`;
-    } else if (this.state.turnsPlayed === 9) {
+    } else if (turnsPlayed === 9) {
       status = 'Cats game!';
     } else {
-      status = `Next player: ${this.state.nextPlayer}`;
+      status = `Next player: ${nextPlayer}`;
     }
 
     return (
@@ -92,7 +100,12 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-        {(winner || this.state.turnsPlayed === 9) && <Button color="primary" onClick={this.handleNewGame}>New Game</Button>}
+        {gameIsOver && <Button
+          color="primary"
+          onClick={this.handleNewGame}
+        >
+          New Game
+        </Button>}
       </div>
     );
   }
