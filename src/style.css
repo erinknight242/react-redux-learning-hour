@@ -5,6 +5,10 @@ body {
 	font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
+button {
+  margin-top: 10px;
+}
+
 .dashboard-wrapper {
 	align-self: center;
 	min-width: 100%;
